@@ -340,3 +340,249 @@ AttributeError: 'tuple' object has no attribute 'left'
 2025-11-10 16:33:59 - PhotoCropPipeline - INFO - ✓ Ya procesado, saltando: 61394054.jpeg
 2025-11-10 16:33:59 - PhotoCropPipeline - INFO - ✓ Ya procesado, saltando: 71677631.jpeg
 2025-11-10 16:33:59 - PhotoCropPipeline - INFO - No hay archivos nuevos para procesar
+2025-11-10 16:41:39 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:41:39 - PhotoCropPipeline - INFO - INICIO DE PROCESADOR DETERMINISTA
+2025-11-10 16:41:39 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:41:39 - PhotoCropPipeline - INFO - Configuración cargada desde: ./config/paths.json
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - Inicialización completada
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - 
+================================================================================
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - 2. ESCANEO DE ENTRADA
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - Total de archivos encontrados: 6
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - 
+================================================================================
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - 3. FILTRADO DE ARCHIVOS NUEVOS
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - Archivos nuevos a procesar: 6
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - 
+================================================================================
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - 4. PROCESAMIENTO DE ARCHIVOS NUEVOS
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - Procesando: 60387033.jpeg
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - ============================================================
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO -   Dimensiones: 1403x1600
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-10 16:41:40 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-10 16:41:41 - PhotoCropPipeline - WARNING -   ⚠️  Imagen enviada a revisión manual → manual_review/2025/admission_2025_01/60387033.jpeg
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - Procesando: 72836440.jpeg
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - ============================================================
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   Dimensiones: 960x1280
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/72836440.jpeg
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - Procesando: 73925636.png
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - ============================================================
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   Dimensiones: 458x710
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   Formato: PNG
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/73925636.png
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - Procesando: 60685876.jpeg
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - ============================================================
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   Dimensiones: 728x1296
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-10 16:41:41 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/60685876.jpeg
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO - Procesando: 61394054.jpeg
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO - ============================================================
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO -   Dimensiones: 1200x1600
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO -   Rostros detectados: 2
+2025-11-10 16:41:42 - PhotoCropPipeline - WARNING -   ⚠️  Detectados 2 rostros
+2025-11-10 16:41:42 - PhotoCropPipeline - WARNING -   ⚠️  Imagen enviada a revisión manual → manual_review/2025/admission_2025_01/61394054.jpeg
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO - Procesando: 71677631.jpeg
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO - ============================================================
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO -   Dimensiones: 1654x2339
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-10 16:41:42 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-10 16:41:44 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-10 16:41:44 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-10 16:41:44 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-10 16:41:44 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/71677631.jpeg
+2025-11-10 16:41:44 - PhotoCropPipeline - INFO - 
+================================================================================
+2025-11-10 16:41:44 - PhotoCropPipeline - INFO - 7. RESUMEN DE PROCESAMIENTO
+2025-11-10 16:41:44 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:41:44 - PhotoCropPipeline - INFO - Total encontrados: 6
+2025-11-10 16:41:44 - PhotoCropPipeline - INFO - Saltados (ya procesados): 0
+2025-11-10 16:41:44 - PhotoCropPipeline - INFO - Nuevos procesados:
+2025-11-10 16:41:44 - PhotoCropPipeline - INFO -   ✓ Exitosos: 4
+2025-11-10 16:41:44 - PhotoCropPipeline - INFO -   ⚠️  Revisión manual: 2
+2025-11-10 16:41:44 - PhotoCropPipeline - INFO -   ✗ Errores: 0
+2025-11-10 16:41:44 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:43:59 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:43:59 - PhotoCropPipeline - INFO - INICIO DE PROCESADOR DETERMINISTA
+2025-11-10 16:43:59 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:43:59 - PhotoCropPipeline - INFO - Configuración cargada desde: ./config/paths.json
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - Inicialización completada
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - 
+================================================================================
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - 2. ESCANEO DE ENTRADA
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - Total de archivos encontrados: 6
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - 
+================================================================================
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - 3. FILTRADO DE ARCHIVOS NUEVOS
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - Archivos nuevos a procesar: 6
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - 
+================================================================================
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - 4. PROCESAMIENTO DE ARCHIVOS NUEVOS
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - Procesando: 60387033.jpeg
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - ============================================================
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO -   Dimensiones: 1403x1600
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-10 16:44:00 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/60387033.jpeg
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - Procesando: 72836440.jpeg
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - ============================================================
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   Dimensiones: 960x1280
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/72836440.jpeg
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - Procesando: 73925636.png
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - ============================================================
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   Dimensiones: 458x710
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   Formato: PNG
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/73925636.png
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - Procesando: 60685876.jpeg
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - ============================================================
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   Dimensiones: 728x1296
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-10 16:44:01 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/60685876.jpeg
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO - Procesando: 61394054.jpeg
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO - ============================================================
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO -   Dimensiones: 1200x1600
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO -   Rostros detectados: 2
+2025-11-10 16:44:02 - PhotoCropPipeline - WARNING -   ⚠️  Detectados 2 rostros
+2025-11-10 16:44:02 - PhotoCropPipeline - WARNING -   ⚠️  Imagen enviada a revisión manual → manual_review/2025/admission_2025_01/61394054.jpeg
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO - Procesando: 71677631.jpeg
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO - ============================================================
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO -   Dimensiones: 1654x2339
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-10 16:44:02 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-10 16:44:04 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-10 16:44:04 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-10 16:44:04 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-10 16:44:04 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/71677631.jpeg
+2025-11-10 16:44:04 - PhotoCropPipeline - INFO - 
+================================================================================
+2025-11-10 16:44:04 - PhotoCropPipeline - INFO - 7. RESUMEN DE PROCESAMIENTO
+2025-11-10 16:44:04 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:44:04 - PhotoCropPipeline - INFO - Total encontrados: 6
+2025-11-10 16:44:04 - PhotoCropPipeline - INFO - Saltados (ya procesados): 0
+2025-11-10 16:44:04 - PhotoCropPipeline - INFO - Nuevos procesados:
+2025-11-10 16:44:04 - PhotoCropPipeline - INFO -   ✓ Exitosos: 5
+2025-11-10 16:44:04 - PhotoCropPipeline - INFO -   ⚠️  Revisión manual: 1
+2025-11-10 16:44:04 - PhotoCropPipeline - INFO -   ✗ Errores: 0
+2025-11-10 16:44:04 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - INICIO DE PROCESADOR DETERMINISTA
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - Configuración cargada desde: ./config/paths.json
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - Inicialización completada
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - 
+================================================================================
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - 2. ESCANEO DE ENTRADA
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - Total de archivos encontrados: 6
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - 
+================================================================================
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - 3. FILTRADO DE ARCHIVOS NUEVOS
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - ✓ Ya procesado, saltando: 60387033.jpeg
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - ✓ Ya procesado, saltando: 72836440.jpeg
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - ✓ Ya procesado, saltando: 73925636.png
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - ✓ Ya procesado, saltando: 60685876.jpeg
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - ✓ Ya procesado, saltando: 61394054.jpeg
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - ✓ Ya procesado, saltando: 71677631.jpeg
+2025-11-10 16:45:00 - PhotoCropPipeline - INFO - No hay archivos nuevos para procesar

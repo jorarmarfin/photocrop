@@ -83,6 +83,7 @@ class CropDecisionEngine:
     ) -> Dict[str, Any]:
         """
         Calcula si una imagen puede ser recortada correctamente.
+        Incluye espacio adicional arriba para el cabello.
 
         Args:
             width: Ancho de la imagen
@@ -97,42 +98,72 @@ class CropDecisionEngine:
         face_center_x = x + w / 2
         face_center_y = y + h / 2
 
-        # Verificar márgenes mínimos
-        margin = 50
-        if face_center_x < margin or face_center_x > (width - margin):
-            return {
-                "status": "MANUAL_REVIEW",
-                "crop_box": None,
-                "reason": "Rostro muy cercano al borde horizontal"
-            }
-
-        if face_center_y < margin or face_center_y > (height - margin):
-            return {
-                "status": "MANUAL_REVIEW",
-                "crop_box": None,
-                "reason": "Rostro muy cercano al borde vertical"
-            }
+        # Estimar posición del cabello (arriba del rostro)
+        # El rostro detectado por dlib va desde la frente hasta el mentón
+        # Agregamos 60% extra arriba para el cabello (más generoso)
+        hair_margin = h * 0.6
+        estimated_top = y - hair_margin
 
         # Calcular crop_box para formato pasaporte (3:4)
         target_aspect = 3 / 4
-        crop_height = min(height, w * 1.5 * (4 / 3))
-        crop_width = crop_height * target_aspect
 
-        # Centrar en el rostro con offset hacia arriba
-        crop_x = max(0, face_center_x - crop_width / 2)
-        crop_y = max(0, face_center_y - crop_height * 0.4)
+        # Dimensiones ideales basadas en el rostro
+        # Factor 2.4 da buen espacio lateral (orejas + margen)
+        ideal_crop_width = w * 2.4
+        ideal_crop_height = ideal_crop_width / target_aspect
 
-        # Ajustar si se sale de los límites
+        # Intentar centrado horizontal perfecto
+        crop_x = face_center_x - ideal_crop_width / 2
+
+        # Posición vertical: comenzar desde el estimado del cabello
+        # Dejamos un pequeño margen (10px) arriba del cabello estimado
+        crop_y = estimated_top - 10
+
+        # AJUSTES POR LÍMITES DE IMAGEN
+        # Si el recorte es más grande que la imagen, ajustar proporcionalmente
+        if ideal_crop_width > width:
+            ideal_crop_width = width
+            ideal_crop_height = ideal_crop_width / target_aspect
+
+        if ideal_crop_height > height:
+            ideal_crop_height = height
+            ideal_crop_width = ideal_crop_height * target_aspect
+
+        crop_width = ideal_crop_width
+        crop_height = ideal_crop_height
+
+        # Ajustar horizontalmente si se sale
+        if crop_x < 0:
+            crop_x = 0
         if crop_x + crop_width > width:
             crop_x = width - crop_width
+
+        # Ajustar verticalmente si se sale
+        if crop_y < 0:
+            crop_y = 0
         if crop_y + crop_height > height:
             crop_y = height - crop_height
 
-        if crop_x < 0 or crop_y < 0:
+        # Verificar que el rostro quede dentro del crop
+        face_right = x + w
+        face_bottom = y + h
+        crop_right = crop_x + crop_width
+        crop_bottom = crop_y + crop_height
+
+        # Si el rostro no cabe completamente en el crop, enviar a manual
+        if x < crop_x or face_right > crop_right or y < crop_y or face_bottom > crop_bottom:
             return {
                 "status": "MANUAL_REVIEW",
                 "crop_box": None,
-                "reason": "No hay espacio suficiente para recorte"
+                "reason": "El rostro no cabe completamente en el recorte calculado"
+            }
+
+        # Verificación final de límites
+        if crop_x < 0 or crop_y < 0 or crop_x + crop_width > width or crop_y + crop_height > height:
+            return {
+                "status": "MANUAL_REVIEW",
+                "crop_box": None,
+                "reason": "Las dimensiones del recorte exceden los límites de la imagen"
             }
 
         crop_box = [
