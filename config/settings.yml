@@ -1,0 +1,5 @@
+standard_size:
+  width: 300
+  height: 400
+face_threshold: 0.5
+

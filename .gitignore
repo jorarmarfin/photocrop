@@ -1,0 +1,111 @@
+# .gitignore para proyecto PhotoCrop
+# Ignorar artefactos de Python, entornos virtuales, IDEs y salidas de procesamiento
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+venv.bak/
+
+# Pipenv / Poetry
+Pipfile.lock
+poetry.lock
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.pytest_cache/
+
+# MyPy
+.mypy_cache/
+
+# Logs
+*.log
+logs/
+
+# Databases
+*.sqlite3
+*.db
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# IDEs and editors
+.idea/
+*.iml
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon
+
+# Node
+node_modules/
+
+# Static / built assets
+
+# Sensitive and local config
+.env
+*.env
+.env.*
+secrets.yaml
+credentials.yml
+config/*.local
+config/*.secret
+*.pem
+*.key
+*.crt
+
+# Project-specific: carpetas y salidas que no deben subirse
+input_raw/
+working/
+prepared/
+output_final/
+manual_review/
+errors/
+
+# Metadata y datos intermedios
+metadata/
+
+# Large data or temporary files
+*.tar.gz
+*.zip
+*.tgz
+*.bak
+*.tmp
+*.swp
+
+# Ignore OS-specific trash
+.Trashes
+
+# keep a sample or README if needed
+!docs/README.md
+
+# End of .gitignore
