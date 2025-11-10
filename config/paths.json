@@ -1,0 +1,14 @@
+{
+  "paths": {
+    "input_raw": "./input_raw",
+    "output": "./output",
+    "metadata": "./metadata",
+    "logs": "./logs",
+    "errors": "./errors",
+    "working": "./working",
+    "prepared": "./prepared",
+    "manual_review": "./manual_review",
+    "processed_index": "./metadata/processed_index.json"
+  }
+}
+

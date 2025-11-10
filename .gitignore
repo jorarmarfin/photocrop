@@ -79,6 +79,7 @@ secrets.yaml
 credentials.yml
 config/*.local
 config/*.secret
+config/local_*.json
 *.pem
 *.key
 *.crt
@@ -87,12 +88,17 @@ config/*.secret
 input_raw/
 working/
 prepared/
+output/
 output_final/
 manual_review/
 errors/
 
-# Metadata y datos intermedios
+# Metadata y datos intermedios - IMPORTANTE: contiene datos sensibles - IMPORTANTE: contiene datos sensibles
 metadata/
+!metadata/README.md
+!metadata/sample.json
+# No subir processed_index.json ya que es específico de cada instalación
+# No subir metadatos individuales ya que pueden contener información personal
 
 # Large data or temporary files
 *.tar.gz
@@ -101,11 +107,32 @@ metadata/
 *.bak
 *.tmp
 *.swp
+*.dmp
+*.dat
+
+# Machine learning models (dlib shape predictor files are large)
+*.dat
+shape_predictor_*.dat
+dlib_face_recognition_resnet_model_v1.dat
 
 # Ignore OS-specific trash
 .Trashes
 
 # keep a sample or README if needed
 !docs/README.md
+!metadata/README.md
+
+# Backups del proyecto
+backup/
+backups/
+*.backup
+*_backup/
+
+# Archivos de sistema y temporales adicionales
+.DS_Store?
+._*
+.Spotlight-V100
+.TemporaryItems
+desktop.ini
 
 # End of .gitignore
