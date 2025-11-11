@@ -100,24 +100,24 @@ class CropDecisionEngine:
 
         # Estimar posición del cabello (arriba del rostro)
         # El rostro detectado por dlib va desde la frente hasta el mentón
-        # Agregamos 60% extra arriba para el cabello (más generoso)
-        hair_margin = h * 0.6
+        # Agregamos 80% extra arriba para el cabello + margen superior generoso
+        hair_margin = h * 0.8  # Aumentado de 0.6 a 0.8 para más espacio
         estimated_top = y - hair_margin
 
         # Calcular crop_box para formato pasaporte (3:4)
         target_aspect = 3 / 4
 
         # Dimensiones ideales basadas en el rostro
-        # Factor 2.4 da buen espacio lateral (orejas + margen)
-        ideal_crop_width = w * 2.4
+        # Factor 2.5 da mejor espacio lateral (aumentado de 2.4)
+        ideal_crop_width = w * 2.5
         ideal_crop_height = ideal_crop_width / target_aspect
 
         # Intentar centrado horizontal perfecto
         crop_x = face_center_x - ideal_crop_width / 2
 
         # Posición vertical: comenzar desde el estimado del cabello
-        # Dejamos un pequeño margen (10px) arriba del cabello estimado
-        crop_y = estimated_top - 10
+        # Dejamos un margen más generoso (20px) arriba del cabello estimado
+        crop_y = estimated_top - 20  # Aumentado de 10 a 20 para más "respiro"
 
         # AJUSTES POR LÍMITES DE IMAGEN
         # Si el recorte es más grande que la imagen, ajustar proporcionalmente
