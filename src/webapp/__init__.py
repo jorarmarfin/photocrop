@@ -1,0 +1,4 @@
+"""
+Módulo webapp para PhotoCrop
+"""
+

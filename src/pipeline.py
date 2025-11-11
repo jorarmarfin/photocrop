@@ -11,11 +11,11 @@ from datetime import datetime
 # Agregar src al path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from core.metadata_manager import MetadataManager
-from core.face_detector import FaceDetector
-from core.image_processor import ImageProcessor
-from utils.logger import setup_logger
-from utils.file_utils import (
+from src.core.metadata_manager import MetadataManager
+from src.core.face_detector import FaceDetector
+from src.core.image_processor import ImageProcessor
+from src.utils.logger import setup_logger
+from src.utils.file_utils import (
     load_paths_config,
     list_images_in_directory,
     copy_file,

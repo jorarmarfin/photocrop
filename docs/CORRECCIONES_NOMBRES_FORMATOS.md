@@ -53,15 +53,15 @@ output_name = img_path.stem + '.jpg'  # ✅ Mantiene nombre original
 ./convert_to_original_format.sh ./prepared ./output
 
 # Ejemplo: De white/ a output_final/
-./convert_to_original_format.sh ./white ./output_final
+./convert_to_original_format.sh ./output_white ./output_final
 
 # Con metadata personalizado
-./convert_to_original_format.sh ./white ./output_final ./metadata 95
+./convert_to_original_format.sh ./output_white ./output_final ./metadata 95
 ```
 
 **También disponible en Python:**
 ```bash
-python src/core/format_converter.py ./white ./output_final --metadata-dir ./metadata --quality 95
+python src/core/format_converter.py ./output_white ./output_final --metadata-dir ./metadata --quality 95
 ```
 
 ---
@@ -86,7 +86,7 @@ ENTRADA:
 
 ↓ [Eliminación de Fondo]
 
-./prepared/ (o ./white/)
+./prepared/ (o ./output_white/)
     ├── foto001.jpg         ✅ Fondo blanco, formato JPG temporal
     ├── imagen002.jpg       ✅ Fondo blanco, formato JPG temporal
     └── postulante003.jpg   ✅ Fondo blanco, formato JPG temporal
@@ -116,11 +116,11 @@ python src/processor_with_bg_removal.py --batch-id admission_2025
 
 ### Ejemplo 2: Conversión Manual Posterior
 ```bash
-# Si tienes fotos en ./white/ y quieres convertir a ./output_final/
-./convert_to_original_format.sh ./white ./output_final
+# Si tienes fotos en ./output_white/ y quieres convertir a ./output_final/
+./convert_to_original_format.sh ./output_white ./output_final
 
 # O con Python
-python src/core/format_converter.py ./white ./output_final
+python src/core/format_converter.py ./output_white ./output_final
 ```
 
 ### Ejemplo 3: Solo Eliminar Fondo (Sin Conversión)
@@ -236,7 +236,7 @@ El metadata ahora incluye formato original:
 
 ### Conversión de White a Output Final
 ```bash
-./convert_to_original_format.sh ./white ./output_final
+./convert_to_original_format.sh ./output_white ./output_final
 ```
 
 ### Con Calidad Personalizada
@@ -246,7 +246,7 @@ El metadata ahora incluye formato original:
 
 ### Usando Python Directamente
 ```bash
-python src/core/format_converter.py ./white ./output_final --quality 95
+python src/core/format_converter.py ./output_white ./output_final --quality 95
 ```
 
 ---

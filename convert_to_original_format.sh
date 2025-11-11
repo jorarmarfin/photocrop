@@ -18,7 +18,7 @@ if [ $# -lt 2 ]; then
     echo ""
     echo "Ejemplos:"
     echo "  $0 ./prepared ./output"
-    echo "  $0 ./white ./output_final ./metadata 95"
+    echo "  $0 ./output_white ./output_final ./metadata 95"
     echo ""
     exit 1
 fi

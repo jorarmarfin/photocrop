@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhotoCrop Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>📸 PhotoCrop Dashboard</h1>
+            <p class="subtitle">Sistema de Procesamiento de Fotos con IA</p>
+        </header>
+
+        <!-- Control Panel -->
+        <section class="control-panel">
+            <div class="card">
+                <h2>Control de Procesamiento</h2>
+                <div class="buttons-grid">
+                    <button id="btnProcess" class="btn btn-primary" onclick="startProcessing()">
+                        🚀 Procesar Fotos (Completo)
+                    </button>
+                    <button id="btnRemoveBg" class="btn btn-secondary" onclick="removeBackground()">
+                        🎨 Quitar Fondo
+                    </button>
+                    <button id="btnConvertFormat" class="btn btn-secondary" onclick="convertFormat()">
+                        🔄 Convertir Formato
+                    </button>
+                </div>
+                <div id="processingStatus" class="status-message"></div>
+            </div>
+        </section>
+
+        <!-- Statistics Dashboard -->
+        <section class="stats-grid">
+            <!-- Input Raw -->
+            <div class="stat-card">
+                <div class="stat-icon">📥</div>
+                <div class="stat-value" id="statInputRaw">-</div>
+                <div class="stat-label">Fotos en Input</div>
+            </div>
+
+            <!-- Processed -->
+            <div class="stat-card success">
+                <div class="stat-icon">✅</div>
+                <div class="stat-value" id="statProcessed">-</div>
+                <div class="stat-label">Procesadas</div>
+            </div>
+
+            <!-- Manual Review -->
+            <div class="stat-card warning">
+                <div class="stat-icon">⚠️</div>
+                <div class="stat-value" id="statManualReview">-</div>
+                <div class="stat-label">Revisión Manual</div>
+            </div>
+
+            <!-- Errors -->
+            <div class="stat-card error">
+                <div class="stat-icon">❌</div>
+                <div class="stat-value" id="statErrors">-</div>
+                <div class="stat-label">Errores</div>
+            </div>
+
+            <!-- Output White -->
+            <div class="stat-card">
+                <div class="stat-icon">🎨</div>
+                <div class="stat-value" id="statOutputWhite">-</div>
+                <div class="stat-label">Fondo Blanco</div>
+            </div>
+
+            <!-- Output Final -->
+            <div class="stat-card success">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-value" id="statOutputFinal">-</div>
+                <div class="stat-label">Finales</div>
+            </div>
+        </section>
+
+        <!-- Folders Section -->
+        <section class="folders-section">
+            <h2>📂 Carpetas del Sistema</h2>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showFolder('output')">Output</button>
+                <button class="tab-btn" onclick="showFolder('output_white')">Fondo Blanco</button>
+                <button class="tab-btn" onclick="showFolder('output_final')">Final</button>
+                <button class="tab-btn" onclick="showFolder('manual_review')">Revisión Manual</button>
+                <button class="tab-btn" onclick="showFolder('errors')">Errores</button>
+            </div>
+
+            <div id="folderContent" class="folder-content">
+                <p class="loading">Cargando...</p>
+            </div>
+        </section>
+
+        <!-- Logs Section -->
+        <section class="logs-section">
+            <div class="card">
+                <h2>📋 Logs del Sistema</h2>
+                <button class="btn btn-secondary" onclick="refreshLogs()">🔄 Actualizar Logs</button>
+                <div id="logsContainer" class="logs-container">
+                    <p class="loading">Cargando logs...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>PhotoCrop Dashboard v1.0 | Última actualización: <span id="lastUpdate">-</span></p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        let autoRefresh = true;
+        let currentFolder = 'output';
+
+        // Función para actualizar estadísticas
+        async function updateStats() {
+            try {
+                const response = await fetch('/api/stats');
+                const data = await response.json();
+
+                // Actualizar contadores de carpetas
+                document.getElementById('statInputRaw').textContent = data.folders.input_raw;
+                document.getElementById('statProcessed').textContent = data.processed.successful;
+                document.getElementById('statManualReview').textContent = data.processed.manual_review;
+                document.getElementById('statErrors').textContent = data.processed.errors;
+                document.getElementById('statOutputWhite').textContent = data.folders.output_white;
+                document.getElementById('statOutputFinal').textContent = data.folders.output_final;
+
+                // Actualizar estado de procesamiento
+                const statusDiv = document.getElementById('processingStatus');
+                const btnProcess = document.getElementById('btnProcess');
+                const btnRemoveBg = document.getElementById('btnRemoveBg');
+                const btnConvertFormat = document.getElementById('btnConvertFormat');
+
+                if (data.processing.is_processing) {
+                    statusDiv.innerHTML = '<div class="alert alert-info">⏳ Procesando fotos...</div>';
+                    btnProcess.disabled = true;
+                    btnRemoveBg.disabled = true;
+                    btnConvertFormat.disabled = true;
+                } else {
+                    btnProcess.disabled = false;
+                    btnRemoveBg.disabled = false;
+                    btnConvertFormat.disabled = false;
+                    if (data.processing.error) {
+                        statusDiv.innerHTML = `<div class="alert alert-error">❌ Error: ${data.processing.error}</div>`;
+                    } else if (data.processing.last_run) {
+                        statusDiv.innerHTML = `<div class="alert alert-success">✅ Última ejecución: ${new Date(data.processing.last_run).toLocaleString()}</div>`;
+                    } else {
+                        statusDiv.innerHTML = '';
+                    }
+                }
+
+                // Actualizar timestamp
+                document.getElementById('lastUpdate').textContent = new Date(data.timestamp).toLocaleTimeString();
+
+            } catch (error) {
+                console.error('Error al actualizar stats:', error);
+            }
+        }
+
+        // Función para iniciar procesamiento completo
+        async function startProcessing() {
+            if (!confirm('¿Iniciar el procesamiento completo de nuevas fotos?\n(Detección facial + Recorte + Quitar fondo + Convertir formato)')) {
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/process', {
+                    method: 'POST'
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('✅ Procesamiento completo iniciado correctamente');
+                    updateStats();
+                } else {
+                    alert('❌ Error: ' + data.message);
+                }
+            } catch (error) {
+                alert('❌ Error al iniciar procesamiento: ' + error.message);
+            }
+        }
+
+        // Función para quitar fondo
+        async function removeBackground() {
+            if (!confirm('¿Quitar fondo de las fotos en output/?\n(Genera fotos con fondo blanco en output_white/)')) {
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/remove-background', {
+                    method: 'POST'
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    alert(`✅ Fondo removido correctamente\nProcesadas: ${data.processed || 0}`);
+                    updateStats();
+                } else {
+                    alert('❌ Error: ' + data.message);
+                }
+            } catch (error) {
+                alert('❌ Error al quitar fondo: ' + error.message);
+            }
+        }
+
+        // Función para convertir formato
+        async function convertFormat() {
+            if (!confirm('¿Convertir fotos de output_white/ a formato original?\n(Genera fotos finales en output_final/)')) {
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/convert-format', {
+                    method: 'POST'
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    alert(`✅ Formato convertido correctamente\nConvertidas: ${data.converted || 0}`);
+                    updateStats();
+                } else {
+                    alert('❌ Error: ' + data.message);
+                }
+            } catch (error) {
+                alert('❌ Error al convertir formato: ' + error.message);
+            }
+        }
+
+        // Función para mostrar carpeta
+        async function showFolder(folder) {
+            currentFolder = folder;
+
+            // Actualizar tabs activos
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Cargar contenido
+            const contentDiv = document.getElementById('folderContent');
+            contentDiv.innerHTML = '<p class="loading">Cargando...</p>';
+
+            try {
+                const response = await fetch(`/api/images/${folder}`);
+                const data = await response.json();
+
+                if (data.images.length === 0) {
+                    contentDiv.innerHTML = '<p class="empty">No hay imágenes en esta carpeta</p>';
+                    return;
+                }
+
+                let html = '<div class="images-grid">';
+                data.images.forEach(img => {
+                    const sizeKB = (img.size / 1024).toFixed(1);
+                    html += `
+                        <div class="image-card">
+                            <div class="image-name">${img.name}</div>
+                            <div class="image-info">
+                                <span>📦 ${sizeKB} KB</span>
+                                <span>🕐 ${img.modified}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+
+                contentDiv.innerHTML = html;
+
+            } catch (error) {
+                contentDiv.innerHTML = `<p class="error">Error al cargar imágenes: ${error.message}</p>`;
+            }
+        }
+
+        // Función para actualizar logs
+        async function refreshLogs() {
+            const logsDiv = document.getElementById('logsContainer');
+            logsDiv.innerHTML = '<p class="loading">Cargando logs...</p>';
+
+            try {
+                const response = await fetch('/api/logs?lines=50');
+                const data = await response.json();
+
+                if (data.logs.length === 0) {
+                    logsDiv.innerHTML = '<p class="empty">No hay logs disponibles</p>';
+                    return;
+                }
+
+                let html = '<pre class="logs-text">';
+                data.logs.forEach(line => {
+                    html += line;
+                });
+                html += '</pre>';
+
+                logsDiv.innerHTML = html;
+
+                // Auto-scroll al final
+                logsDiv.scrollTop = logsDiv.scrollHeight;
+
+            } catch (error) {
+                logsDiv.innerHTML = `<p class="error">Error al cargar logs: ${error.message}</p>`;
+            }
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStats();
+            refreshLogs();
+            showFolder('output');
+
+            // Auto-refresh cada 5 segundos
+            setInterval(() => {
+                if (autoRefresh) {
+                    updateStats();
+                }
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
+

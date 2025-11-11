@@ -11,11 +11,11 @@ from datetime import datetime, timezone
 from PIL import Image
 import numpy as np
 
-from core.metadata_manager import MetadataManager
-from core.face_detector import FaceDetector
-from core.image_processor import ImageProcessor
-from utils.logger import setup_logger
-from utils.file_utils import load_paths_config, ensure_directory
+from src.core.metadata_manager import MetadataManager
+from src.core.face_detector import FaceDetector
+from src.core.image_processor import ImageProcessor
+from src.utils.logger import setup_logger
+from src.utils.file_utils import load_paths_config, ensure_directory
 
 
 class ProcessedIndexManager:

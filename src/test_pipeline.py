@@ -9,10 +9,10 @@ from pathlib import Path
 # Agregar src al path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from core.metadata_manager import MetadataManager
-from core.image_processor import ImageProcessor
-from utils.logger import setup_logger
-from utils.file_utils import load_paths_config
+from src.core.metadata_manager import MetadataManager
+from src.core.image_processor import ImageProcessor
+from src.utils.logger import setup_logger
+from src.utils.file_utils import load_paths_config
 
 
 def test_metadata_manager():

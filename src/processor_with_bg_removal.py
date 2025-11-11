@@ -10,10 +10,10 @@ from typing import Optional, Tuple
 # Agregar src al path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from deterministic_processor import DeterministicPhotoProcessor
-from core.background_remover import BackgroundRemover
-from core.format_converter import FormatConverter
-from utils.file_utils import ensure_directory
+from src.deterministic_processor import DeterministicPhotoProcessor
+from src.core.background_remover import BackgroundRemover
+from src.core.format_converter import FormatConverter
+from src.utils.file_utils import ensure_directory
 from PIL import Image
 import shutil
 
@@ -62,8 +62,10 @@ class PhotoProcessorWithBgRemoval(DeterministicPhotoProcessor):
         # Crear carpetas adicionales
         self.paths["working_cropped"] = "./working/faces_cropped"
         self.paths["prepared"] = "./prepared"
+        self.paths["output_white"] = "./output_white"
         ensure_directory(self.paths["working_cropped"])
         ensure_directory(self.paths["prepared"])
+        ensure_directory(self.paths["output_white"])
 
     def _process_successful_crop(
         self,
@@ -122,10 +124,19 @@ class PhotoProcessorWithBgRemoval(DeterministicPhotoProcessor):
 
             if success:
                 self.logger.info(f"  ✓ Fondo removido: {prepared_path}")
+
+                # Guardar también en output_white (carpeta con fondo blanco)
+                output_white_dir = Path(self.paths["output_white"])
+                output_white_dir.mkdir(parents=True, exist_ok=True)
+                output_white_path = output_white_dir / f"{img_path.stem}.jpg"
+                shutil.copy2(prepared_path, output_white_path)
+                self.logger.info(f"  ✓ Guardado en output_white: {output_white_path}")
+
                 metadata["background_removed"] = True
                 metadata["background_color"] = self._color_to_name(self.background_color)
                 metadata["background_removal_model"] = "u2net"
                 metadata["prepared_path"] = str(prepared_path)
+                metadata["output_white_path"] = str(output_white_path)
 
                 # Usar imagen con fondo removido
                 final_source = prepared_path
