@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from deterministic_processor import DeterministicPhotoProcessor
 from core.background_remover import BackgroundRemover
+from core.format_converter import FormatConverter
 from utils.file_utils import ensure_directory
 from PIL import Image
 import shutil
@@ -53,6 +54,11 @@ class PhotoProcessorWithBgRemoval(DeterministicPhotoProcessor):
                 self.logger.warning("⚠ rembg no disponible, desactivando remoción de fondo")
                 self.enable_bg_removal = False
 
+        # Inicializar conversor de formato
+        self.format_converter = FormatConverter(
+            metadata_dir=Path(self.paths["metadata"])
+        )
+
         # Crear carpetas adicionales
         self.paths["working_cropped"] = "./working/faces_cropped"
         self.paths["prepared"] = "./prepared"
@@ -83,10 +89,14 @@ class PhotoProcessorWithBgRemoval(DeterministicPhotoProcessor):
         # 1. APLICAR RECORTE
         cropped_img = img.crop(crop_box)
 
-        # 2. GUARDAR EN WORKING
+        # Guardar formato original en metadata
+        original_format = img.format or 'JPEG'
+        original_extension = img_path.suffix.lower()
+
+        # 2. GUARDAR EN WORKING (mantener nombre original)
         working_dir = Path(self.paths["working_cropped"])
         working_dir.mkdir(parents=True, exist_ok=True)
-        working_path = working_dir / img_path.name
+        working_path = working_dir / img_path.name  # Nombre original
 
         if img_path.suffix.lower() in ['.jpg', '.jpeg']:
             cropped_img.save(working_path, 'JPEG', quality=95)
@@ -101,7 +111,8 @@ class PhotoProcessorWithBgRemoval(DeterministicPhotoProcessor):
 
             prepared_dir = Path(self.paths["prepared"])
             prepared_dir.mkdir(parents=True, exist_ok=True)
-            prepared_path = prepared_dir / img_path.name
+            # Preparada siempre como JPG (fondo blanco)
+            prepared_path = prepared_dir / f"{img_path.stem}.jpg"
 
             success = self.background_remover.remove_background(
                 input_path=working_path,
@@ -129,12 +140,29 @@ class PhotoProcessorWithBgRemoval(DeterministicPhotoProcessor):
             metadata["background_color"] = None
             final_source = working_path
 
-        # 4. COPIAR A OUTPUT FINAL
+        # 4. CONVERTIR AL FORMATO ORIGINAL
         output_dir = Path(self.paths["output"])
         output_dir.mkdir(parents=True, exist_ok=True)
-        output_path = output_dir / img_path.name
+        # Usar extensión original del archivo de entrada
+        output_path = output_dir / f"{img_path.stem}{original_extension}"
 
-        shutil.copy2(final_source, output_path)
+        self.logger.info(f"  🔄 Convirtiendo a formato original: {original_extension}")
+
+        # Si la fuente ya está en el formato correcto, solo copiar
+        if final_source.suffix.lower() == original_extension:
+            shutil.copy2(final_source, output_path)
+        else:
+            # Convertir al formato original
+            conversion_success = self.format_converter.convert_image(
+                input_path=final_source,
+                output_path=output_path,
+                target_format=original_extension,
+                quality=95
+            )
+
+            if not conversion_success:
+                self.logger.warning(f"  ⚠ Error en conversión, copiando original")
+                shutil.copy2(final_source, output_path)
 
         # 5. ACTUALIZAR METADATA
         metadata = self.metadata_manager.update_metadata(

@@ -116,11 +116,13 @@ class BackgroundRemover:
             for img_path in input_dir.glob(f"*{ext}"):
                 stats['total'] += 1
 
-                # Determinar nombre de salida
+                # Mantener el nombre original del archivo
                 if background_color is not None:
-                    output_name = img_path.stem + '_nobg.jpg'
+                    # Con fondo sólido, guardar como JPG
+                    output_name = img_path.stem + '.jpg'
                 else:
-                    output_name = img_path.stem + '_nobg.png'
+                    # Con transparencia, guardar como PNG
+                    output_name = img_path.stem + '.png'
 
                 output_path = output_dir / output_name
 

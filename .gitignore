@@ -90,9 +90,9 @@ working/
 prepared/
 output/
 output_final/
+output_white/
 manual_review/
 errors/
-
 # Metadata y datos intermedios - IMPORTANTE: contiene datos sensibles - IMPORTANTE: contiene datos sensibles
 metadata/
 !metadata/README.md
@@ -109,7 +109,8 @@ metadata/
 *.swp
 *.dmp
 *.dat
-
+*.jpg
+*.jpeg
 # Machine learning models (dlib shape predictor files are large)
 *.dat
 shape_predictor_*.dat
