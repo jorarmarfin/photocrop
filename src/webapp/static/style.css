@@ -366,3 +366,62 @@ footer {
     background: #888;
 }
 
+/* Barra de progreso personalizada para SweetAlert2 */
+.progress-bar-container {
+    width: 100%;
+    height: 30px;
+    background-color: #f0f0f0;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 20px 0;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    width: 0%;
+    transition: width 0.5s ease;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+}
+
+#progressText {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Personalización de SweetAlert2 */
+.swal2-popup {
+    border-radius: 15px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.swal2-title {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.swal2-html-container {
+    font-size: 1.1em;
+}
+
+.swal2-confirm {
+    border-radius: 8px;
+    padding: 12px 30px;
+    font-weight: bold;
+}
+
+.swal2-cancel {
+    border-radius: 8px;
+    padding: 12px 30px;
+    font-weight: bold;
+}
+

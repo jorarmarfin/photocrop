@@ -460,3 +460,258 @@ OSError: cannot write mode RGBA as JPEG
 2025-11-11 12:54:24 - PhotoCropPipeline - INFO -   ⚠️  Revisión manual: 0
 2025-11-11 12:54:24 - PhotoCropPipeline - INFO -   ✗ Errores: 3
 2025-11-11 12:54:24 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - INICIO DE PROCESADOR DETERMINISTA
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - Configuración cargada desde: ./config/paths.json
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - Inicialización completada
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - ✓ BackgroundRemover inicializado
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - 
+================================================================================
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - 2. ESCANEO DE ENTRADA
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - Total de archivos encontrados: 10
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - 
+================================================================================
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - 3. FILTRADO DE ARCHIVOS NUEVOS
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - Archivos nuevos a procesar: 10
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - 
+================================================================================
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - 4. PROCESAMIENTO DE ARCHIVOS NUEVOS
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - Procesando: 61424791.jpeg
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - ============================================================
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO -   Dimensiones: 1204x1600
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-11 13:03:57 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-11 13:03:58 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-11 13:03:58 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-11 13:03:58 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-11 13:03:58 - PhotoCropPipeline - INFO -   ✓ Guardado en working: working/faces_cropped/61424791.jpeg
+2025-11-11 13:03:58 - PhotoCropPipeline - INFO -   🎨 Removiendo fondo con IA...
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO -   ✓ Fondo removido: prepared/61424791.jpg
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO -   ✓ Guardado en output_white: output_white/61424791.jpeg
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO -   🔄 Convirtiendo a formato original: .jpeg
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/61424791.jpeg
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO - Procesando: 61425151.jpg
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO - ============================================================
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO -   Dimensiones: 1199x1599
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO -   Formato: PNG
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-11 13:03:59 - PhotoCropPipeline - ERROR - Error inesperado: cannot write mode RGBA as JPEG
+Traceback (most recent call last):
+  File "/home/lmayta/PycharmProjects/PhotoCrop/.venv/lib/python3.12/site-packages/PIL/JpegImagePlugin.py", line 662, in _save
+    rawmode = RAWMODE[im.mode]
+              ~~~~~~~^^^^^^^^^
+KeyError: 'RGBA'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/lmayta/PycharmProjects/PhotoCrop/src/deterministic_processor.py", line 370, in _process_single_file
+    self._handle_single_face(img_path, img, metadata, batch_id, face_box)
+  File "/home/lmayta/PycharmProjects/PhotoCrop/src/deterministic_processor.py", line 523, in _handle_single_face
+    self._process_successful_crop(img_path, img, metadata, batch_id, crop_decision["crop_box"])
+  File "/home/lmayta/PycharmProjects/PhotoCrop/src/processor_with_bg_removal.py", line 104, in _process_successful_crop
+    cropped_img.save(working_path, 'JPEG', quality=95)
+  File "/home/lmayta/PycharmProjects/PhotoCrop/.venv/lib/python3.12/site-packages/PIL/Image.py", line 2571, in save
+    save_handler(self, fp, filename)
+  File "/home/lmayta/PycharmProjects/PhotoCrop/.venv/lib/python3.12/site-packages/PIL/JpegImagePlugin.py", line 665, in _save
+    raise OSError(msg) from e
+OSError: cannot write mode RGBA as JPEG
+2025-11-11 13:03:59 - PhotoCropPipeline - ERROR -   ✗ Error en procesamiento
+2025-11-11 13:03:59 - PhotoCropPipeline - ERROR -   ✗ Imagen con error → errors/2025/batch_20251111_130357/61425151.jpg
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO - Procesando: 61425961.jpeg
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO - ============================================================
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO -   Dimensiones: 1200x1600
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-11 13:03:59 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-11 13:04:00 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-11 13:04:00 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-11 13:04:00 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-11 13:04:00 - PhotoCropPipeline - INFO -   ✓ Guardado en working: working/faces_cropped/61425961.jpeg
+2025-11-11 13:04:00 - PhotoCropPipeline - INFO -   🎨 Removiendo fondo con IA...
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO -   ✓ Fondo removido: prepared/61425961.jpg
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO -   ✓ Guardado en output_white: output_white/61425961.jpeg
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO -   🔄 Convirtiendo a formato original: .jpeg
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/61425961.jpeg
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO - Procesando: 61424116.jpeg
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO - ============================================================
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO -   Dimensiones: 472x591
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO -   ✓ Guardado en working: working/faces_cropped/61424116.jpeg
+2025-11-11 13:04:01 - PhotoCropPipeline - INFO -   🎨 Removiendo fondo con IA...
+2025-11-11 13:04:02 - PhotoCropPipeline - INFO -   ✓ Fondo removido: prepared/61424116.jpg
+2025-11-11 13:04:02 - PhotoCropPipeline - INFO -   ✓ Guardado en output_white: output_white/61424116.jpeg
+2025-11-11 13:04:02 - PhotoCropPipeline - INFO -   🔄 Convirtiendo a formato original: .jpeg
+2025-11-11 13:04:02 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/61424116.jpeg
+2025-11-11 13:04:02 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-11 13:04:02 - PhotoCropPipeline - INFO - Procesando: 61427325.jpeg
+2025-11-11 13:04:02 - PhotoCropPipeline - INFO - ============================================================
+2025-11-11 13:04:02 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-11 13:04:02 - PhotoCropPipeline - INFO -   Dimensiones: 1198x1600
+2025-11-11 13:04:02 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-11 13:04:02 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-11 13:04:02 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-11 13:04:02 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-11 13:04:03 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-11 13:04:03 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-11 13:04:03 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-11 13:04:03 - PhotoCropPipeline - INFO -   ✓ Guardado en working: working/faces_cropped/61427325.jpeg
+2025-11-11 13:04:03 - PhotoCropPipeline - INFO -   🎨 Removiendo fondo con IA...
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO -   ✓ Fondo removido: prepared/61427325.jpg
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO -   ✓ Guardado en output_white: output_white/61427325.jpeg
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO -   🔄 Convirtiendo a formato original: .jpeg
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/61427325.jpeg
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO - Procesando: 61424048.jpeg
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO - ============================================================
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO -   Dimensiones: 347x470
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO -   ✓ Guardado en working: working/faces_cropped/61424048.jpeg
+2025-11-11 13:04:04 - PhotoCropPipeline - INFO -   🎨 Removiendo fondo con IA...
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO -   ✓ Fondo removido: prepared/61424048.jpg
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO -   ✓ Guardado en output_white: output_white/61424048.jpeg
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO -   🔄 Convirtiendo a formato original: .jpeg
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/61424048.jpeg
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO - Procesando: 61424844.jpeg
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO - ============================================================
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO -   Dimensiones: 459x562
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO -   ✓ Guardado en working: working/faces_cropped/61424844.jpeg
+2025-11-11 13:04:05 - PhotoCropPipeline - INFO -   🎨 Removiendo fondo con IA...
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   ✓ Fondo removido: prepared/61424844.jpg
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   ✓ Guardado en output_white: output_white/61424844.jpeg
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   🔄 Convirtiendo a formato original: .jpeg
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/61424844.jpeg
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO - Procesando: 61424580.jpg
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO - ============================================================
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   Dimensiones: 276x354
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   Formato: PNG
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-11 13:04:06 - PhotoCropPipeline - ERROR - Error inesperado: cannot write mode RGBA as JPEG
+Traceback (most recent call last):
+  File "/home/lmayta/PycharmProjects/PhotoCrop/.venv/lib/python3.12/site-packages/PIL/JpegImagePlugin.py", line 662, in _save
+    rawmode = RAWMODE[im.mode]
+              ~~~~~~~^^^^^^^^^
+KeyError: 'RGBA'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/lmayta/PycharmProjects/PhotoCrop/src/deterministic_processor.py", line 370, in _process_single_file
+    self._handle_single_face(img_path, img, metadata, batch_id, face_box)
+  File "/home/lmayta/PycharmProjects/PhotoCrop/src/deterministic_processor.py", line 523, in _handle_single_face
+    self._process_successful_crop(img_path, img, metadata, batch_id, crop_decision["crop_box"])
+  File "/home/lmayta/PycharmProjects/PhotoCrop/src/processor_with_bg_removal.py", line 104, in _process_successful_crop
+    cropped_img.save(working_path, 'JPEG', quality=95)
+  File "/home/lmayta/PycharmProjects/PhotoCrop/.venv/lib/python3.12/site-packages/PIL/Image.py", line 2571, in save
+    save_handler(self, fp, filename)
+  File "/home/lmayta/PycharmProjects/PhotoCrop/.venv/lib/python3.12/site-packages/PIL/JpegImagePlugin.py", line 665, in _save
+    raise OSError(msg) from e
+OSError: cannot write mode RGBA as JPEG
+2025-11-11 13:04:06 - PhotoCropPipeline - ERROR -   ✗ Error en procesamiento
+2025-11-11 13:04:06 - PhotoCropPipeline - ERROR -   ✗ Imagen con error → errors/2025/batch_20251111_130357/61424580.jpg
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO - Procesando: 61424638.jpeg
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO - ============================================================
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   Dimensiones: 1204x1600
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   Formato: JPEG
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   ✓ Guardado en working: working/faces_cropped/61424638.jpeg
+2025-11-11 13:04:06 - PhotoCropPipeline - INFO -   🎨 Removiendo fondo con IA...
+2025-11-11 13:04:07 - PhotoCropPipeline - INFO -   ✓ Fondo removido: prepared/61424638.jpg
+2025-11-11 13:04:07 - PhotoCropPipeline - INFO -   ✓ Guardado en output_white: output_white/61424638.jpeg
+2025-11-11 13:04:07 - PhotoCropPipeline - INFO -   🔄 Convirtiendo a formato original: .jpeg
+2025-11-11 13:04:07 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/61424638.jpeg
+2025-11-11 13:04:07 - PhotoCropPipeline - INFO - 
+============================================================
+2025-11-11 13:04:07 - PhotoCropPipeline - INFO - Procesando: 61424702.png
+2025-11-11 13:04:07 - PhotoCropPipeline - INFO - ============================================================
+2025-11-11 13:04:07 - PhotoCropPipeline - INFO - 4.1 Validación básica...
+2025-11-11 13:04:07 - PhotoCropPipeline - INFO -   Dimensiones: 1024x1536
+2025-11-11 13:04:07 - PhotoCropPipeline - INFO -   Formato: PNG
+2025-11-11 13:04:07 - PhotoCropPipeline - INFO - 4.2 Creando metadato inicial...
+2025-11-11 13:04:07 - PhotoCropPipeline - INFO -   Orientación: portrait
+2025-11-11 13:04:07 - PhotoCropPipeline - INFO - 4.3 Detección facial con dlib...
+2025-11-11 13:04:08 - PhotoCropPipeline - INFO -   Rostros detectados: 1
+2025-11-11 13:04:08 - PhotoCropPipeline - INFO -   ✓ Un rostro detectado
+2025-11-11 13:04:08 - PhotoCropPipeline - INFO -   ✓ Aplicando recorte...
+2025-11-11 13:04:08 - PhotoCropPipeline - INFO -   ✓ Guardado en working: working/faces_cropped/61424702.png
+2025-11-11 13:04:08 - PhotoCropPipeline - INFO -   🎨 Removiendo fondo con IA...
+2025-11-11 13:04:09 - PhotoCropPipeline - INFO -   ✓ Fondo removido: prepared/61424702.jpg
+2025-11-11 13:04:10 - PhotoCropPipeline - INFO -   ✓ Guardado en output_white: output_white/61424702.png
+2025-11-11 13:04:10 - PhotoCropPipeline - INFO -   🔄 Convirtiendo a formato original: .png
+2025-11-11 13:04:10 - PhotoCropPipeline - INFO -   ✓ Imagen procesada exitosamente → output/61424702.png
+2025-11-11 13:04:10 - PhotoCropPipeline - INFO - 
+================================================================================
+2025-11-11 13:04:10 - PhotoCropPipeline - INFO - 7. RESUMEN DE PROCESAMIENTO
+2025-11-11 13:04:10 - PhotoCropPipeline - INFO - ================================================================================
+2025-11-11 13:04:10 - PhotoCropPipeline - INFO - Total encontrados: 10
+2025-11-11 13:04:10 - PhotoCropPipeline - INFO - Saltados (ya procesados): 0
+2025-11-11 13:04:10 - PhotoCropPipeline - INFO - Nuevos procesados:
+2025-11-11 13:04:10 - PhotoCropPipeline - INFO -   ✓ Exitosos: 8
+2025-11-11 13:04:10 - PhotoCropPipeline - INFO -   ⚠️  Revisión manual: 0
+2025-11-11 13:04:10 - PhotoCropPipeline - INFO -   ✗ Errores: 2
+2025-11-11 13:04:10 - PhotoCropPipeline - INFO - ================================================================================

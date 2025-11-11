@@ -113,7 +113,7 @@ class PhotoProcessorWithBgRemoval(DeterministicPhotoProcessor):
 
             prepared_dir = Path(self.paths["prepared"])
             prepared_dir.mkdir(parents=True, exist_ok=True)
-            # Preparada siempre como JPG (fondo blanco)
+            # Preparada como JPG temporal (fondo blanco)
             prepared_path = prepared_dir / f"{img_path.stem}.jpg"
 
             success = self.background_remover.remove_background(
@@ -125,11 +125,24 @@ class PhotoProcessorWithBgRemoval(DeterministicPhotoProcessor):
             if success:
                 self.logger.info(f"  ✓ Fondo removido: {prepared_path}")
 
-                # Guardar también en output_white (carpeta con fondo blanco)
+                # Guardar en output_white manteniendo extensión original
                 output_white_dir = Path(self.paths["output_white"])
                 output_white_dir.mkdir(parents=True, exist_ok=True)
-                output_white_path = output_white_dir / f"{img_path.stem}.jpg"
-                shutil.copy2(prepared_path, output_white_path)
+                output_white_path = output_white_dir / f"{img_path.stem}{original_extension}"
+
+                # Convertir al formato original si es necesario
+                if original_extension == '.jpg' or original_extension == '.jpeg':
+                    # Ya es JPG, solo copiar
+                    shutil.copy2(prepared_path, output_white_path)
+                else:
+                    # Convertir al formato original
+                    self.format_converter.convert_image(
+                        input_path=prepared_path,
+                        output_path=output_white_path,
+                        target_format=original_extension,
+                        quality=95
+                    )
+
                 self.logger.info(f"  ✓ Guardado en output_white: {output_white_path}")
 
                 metadata["background_removed"] = True

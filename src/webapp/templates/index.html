@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PhotoCrop Dashboard</title>
     <link rel="stylesheet" href="/static/style.css">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="container">
@@ -165,9 +167,38 @@
 
         // Función para iniciar procesamiento completo
         async function startProcessing() {
-            if (!confirm('¿Iniciar el procesamiento completo de nuevas fotos?\n(Detección facial + Recorte + Quitar fondo + Convertir formato)')) {
-                return;
-            }
+            const result = await Swal.fire({
+                title: '🚀 Procesamiento Completo',
+                html: '¿Iniciar el procesamiento completo de nuevas fotos?<br><br>' +
+                      '<small>• Detección facial<br>• Recorte inteligente<br>• Quitar fondo<br>• Convertir formato</small>',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, procesar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#667eea',
+                cancelButtonColor: '#d33'
+            });
+
+            if (!result.isConfirmed) return;
+
+            // Mostrar barra de progreso
+            Swal.fire({
+                title: '⏳ Procesando fotos...',
+                html: '<b></b> fotos procesadas.<br><br>' +
+                      '<div class="progress-bar-container">' +
+                      '<div class="progress-bar" id="progressBar"></div>' +
+                      '</div>' +
+                      '<div id="progressText">Iniciando...</div>',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            // Iniciar monitoreo de progreso
+            let progressInterval = setInterval(updateProgress, 1000);
 
             try {
                 const response = await fetch('/api/process', {
@@ -175,22 +206,94 @@
                 });
                 const data = await response.json();
 
+                clearInterval(progressInterval);
+
                 if (data.success) {
-                    alert('✅ Procesamiento completo iniciado correctamente');
+                    await Swal.fire({
+                        icon: 'success',
+                        title: '✅ ¡Procesamiento Iniciado!',
+                        html: 'El procesamiento está en curso.<br>Los resultados se actualizarán automáticamente.',
+                        confirmButtonColor: '#667eea',
+                        timer: 3000
+                    });
                     updateStats();
                 } else {
-                    alert('❌ Error: ' + data.message);
+                    await Swal.fire({
+                        icon: 'error',
+                        title: '❌ Error',
+                        text: data.message,
+                        confirmButtonColor: '#667eea'
+                    });
                 }
             } catch (error) {
-                alert('❌ Error al iniciar procesamiento: ' + error.message);
+                clearInterval(progressInterval);
+                await Swal.fire({
+                    icon: 'error',
+                    title: '❌ Error',
+                    text: 'Error al iniciar procesamiento: ' + error.message,
+                    confirmButtonColor: '#667eea'
+                });
+            }
+        }
+
+        // Función para actualizar progreso visual
+        async function updateProgress() {
+            try {
+                const response = await fetch('/api/stats');
+                const data = await response.json();
+
+                const total = data.folders.input_raw || 0;
+                const processed = data.processed.total_processed || 0;
+
+                if (total > 0) {
+                    const percentage = Math.min((processed / total) * 100, 100);
+                    const progressBar = document.getElementById('progressBar');
+                    const progressText = document.getElementById('progressText');
+
+                    if (progressBar) {
+                        progressBar.style.width = percentage + '%';
+                    }
+                    if (progressText) {
+                        progressText.innerHTML = `Procesadas: ${processed} de ${total} (${percentage.toFixed(0)}%)`;
+                    }
+
+                    const contentElement = Swal.getHtmlContainer().querySelector('b');
+                    if (contentElement) {
+                        contentElement.textContent = processed;
+                    }
+                }
+            } catch (error) {
+                console.error('Error actualizando progreso:', error);
             }
         }
 
         // Función para quitar fondo
         async function removeBackground() {
-            if (!confirm('¿Quitar fondo de las fotos en output/?\n(Genera fotos con fondo blanco en output_white/)')) {
-                return;
-            }
+            const result = await Swal.fire({
+                title: '🎨 Quitar Fondo',
+                html: '¿Quitar fondo de las fotos en <b>output/</b>?<br><br>' +
+                      '<small>Genera fotos con fondo blanco en <b>output_white/</b></small>',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, quitar fondo',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#f093fb',
+                cancelButtonColor: '#d33'
+            });
+
+            if (!result.isConfirmed) return;
+
+            // Mostrar loading
+            Swal.fire({
+                title: '🎨 Quitando fondo...',
+                html: 'Procesando imágenes con IA',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
 
             try {
                 const response = await fetch('/api/remove-background', {
@@ -199,21 +302,58 @@
                 const data = await response.json();
 
                 if (data.success) {
-                    alert(`✅ Fondo removido correctamente\nProcesadas: ${data.processed || 0}`);
+                    await Swal.fire({
+                        icon: 'success',
+                        title: '✅ Fondo Removido',
+                        html: `<b>${data.processed || 0}</b> fotos procesadas correctamente`,
+                        confirmButtonColor: '#f093fb'
+                    });
                     updateStats();
                 } else {
-                    alert('❌ Error: ' + data.message);
+                    await Swal.fire({
+                        icon: 'error',
+                        title: '❌ Error',
+                        text: data.message,
+                        confirmButtonColor: '#f093fb'
+                    });
                 }
             } catch (error) {
-                alert('❌ Error al quitar fondo: ' + error.message);
+                await Swal.fire({
+                    icon: 'error',
+                    title: '❌ Error',
+                    text: 'Error al quitar fondo: ' + error.message,
+                    confirmButtonColor: '#f093fb'
+                });
             }
         }
 
         // Función para convertir formato
         async function convertFormat() {
-            if (!confirm('¿Convertir fotos de output_white/ a formato original?\n(Genera fotos finales en output_final/)')) {
-                return;
-            }
+            const result = await Swal.fire({
+                title: '🔄 Convertir Formato',
+                html: '¿Convertir fotos de <b>output_white/</b> a formato original?<br><br>' +
+                      '<small>Genera fotos finales en <b>output_final/</b></small>',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, convertir',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#f5576c',
+                cancelButtonColor: '#d33'
+            });
+
+            if (!result.isConfirmed) return;
+
+            // Mostrar loading
+            Swal.fire({
+                title: '🔄 Convirtiendo formato...',
+                html: 'Procesando archivos',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
 
             try {
                 const response = await fetch('/api/convert-format', {
@@ -222,13 +362,28 @@
                 const data = await response.json();
 
                 if (data.success) {
-                    alert(`✅ Formato convertido correctamente\nConvertidas: ${data.converted || 0}`);
+                    await Swal.fire({
+                        icon: 'success',
+                        title: '✅ Formato Convertido',
+                        html: `<b>${data.converted || 0}</b> fotos convertidas al formato original`,
+                        confirmButtonColor: '#f5576c'
+                    });
                     updateStats();
                 } else {
-                    alert('❌ Error: ' + data.message);
+                    await Swal.fire({
+                        icon: 'error',
+                        title: '❌ Error',
+                        text: data.message,
+                        confirmButtonColor: '#f5576c'
+                    });
                 }
             } catch (error) {
-                alert('❌ Error al convertir formato: ' + error.message);
+                await Swal.fire({
+                    icon: 'error',
+                    title: '❌ Error',
+                    text: 'Error al convertir formato: ' + error.message,
+                    confirmButtonColor: '#f5576c'
+                });
             }
         }
 
